@@ -20,9 +20,9 @@ class FangtianxiaPipeline:
 
     def process_item(self, item, spider):
         if isinstance(item,NewhouseItem):
-            self.new_house_collection.insert_one(item)
+            self.new_house_collection.insert_one(dict(item))
         else:
-            self.esf_house_collection.insert_one(item)
+            self.esf_house_collection.insert_one(dict(item))
         return item
 
     def close_spider(self,spider):

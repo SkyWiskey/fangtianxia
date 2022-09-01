@@ -5,7 +5,8 @@ NEWSPIDER_MODULE = 'fangtianxia.spiders'
 
 ROBOTSTXT_OBEY = False
 
-DOWNLOAD_DELAY = 3
+import random
+DOWNLOAD_DELAY = random.uniform(1,2)
 
 # Override the default request headers:
 DEFAULT_REQUEST_HEADERS = {
@@ -16,12 +17,13 @@ DEFAULT_REQUEST_HEADERS = {
 
 DOWNLOADER_MIDDLEWARES = {
    'fangtianxia.middlewares.UseragentDownloadMiddleware': 543,
+   # 'fangtianxia.middlewares.IpProxyDownloadMiddleware': 542,
 }
 
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    'fangtianxia.pipelines.FangtianxiaPipeline': 300,
-# }
+ITEM_PIPELINES = {
+   'fangtianxia.pipelines.FangtianxiaPipeline': 300,
+}
 
 #scrapy_redis相关配置
 #确保request存储到redis中
@@ -31,13 +33,13 @@ SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
 
 #设置redis为item_pipeline
-ITEM_PIPELINES = {
-    'scrapy_redis.pipelines.RedisPipeline':300
-}
+# ITEM_PIPELINES = {
+#     'scrapy_redis.pipelines.RedisPipeline':300
+# }
 
 #在redis中保持scrapy_redis用到的队列，不会清理redis中的队列，从而可以实现暂停和恢复的功能
 SCHEDULER_PERSIST = True
 
 #设置连接redis信息
-REDIS_HOST = '192.168.0.100'
+REDIS_HOST = '127.0.0.1'
 REDIS_PORT = 6379
