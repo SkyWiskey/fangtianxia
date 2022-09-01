@@ -1,7 +1,7 @@
 import scrapy
 import re
 
-from fangtianxia.items import NewhouseItem,EsfItem
+from ..items import NewhouseItem,EsfItem
 from scrapy_redis.spiders import RedisSpider
 
 
